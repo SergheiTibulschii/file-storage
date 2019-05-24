@@ -23,4 +23,4 @@ const connect = cb => {
 
 const getDb = () => state.db
 
-module.exports = { getDb, connect}
+module.exports = { getDb, connect }

@@ -6,16 +6,18 @@ const tableName = process.env.FILE_METADATA_TABLE
 const saveFileMetadata = fileMetadata => {
   return new Promise((resolve, reject) => {
     getDb()
-        .collection(tableName)
-        .replaceOne({ fileName: fileMetadata.fileName }, fileMetadata, { upsert: true }, (err, result) => {
-          if(err) reject(err)
+      .collection(tableName)
+      .replaceOne({ fileName: fileMetadata.fileName }, fileMetadata, { upsert: true }, (err, result) => {
+        if (err) {
+          reject(err)
+        }
 
-          if((result.message.documents[0].nModified)){
-            resolve(null)
-          }else{
-            resolve(result.ops[0])
-          }
-        })
+        if ((result.message.documents[0].nModified)) {
+          resolve(null)
+        } else {
+          resolve(result.ops[0])
+        }
+      })
   })
 }
 

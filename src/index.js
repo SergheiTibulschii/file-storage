@@ -1,7 +1,5 @@
 const app = require('./app')
-const {connect} = require('./dbContext')
-
-
+const { connect } = require('./dbContext')
 
 connect(() => {
   app.listen(process.env.PORT, () => {

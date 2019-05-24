@@ -31,7 +31,9 @@ const saveFile = (fileName, fileStream) => {
   const pathToFile = formatFilePath(fileName)
 
   return new Promise(async (resolve, reject) => {
-    if (!(await fileOrDirectoryExists(storagePath))) await fs.mkdir(storagePath, err => reject(err))
+    if (!(await fileOrDirectoryExists(storagePath))) {
+      fs.mkdirSync(storagePath)
+    }
 
     const ws = fs.createWriteStream(pathToFile)
 
