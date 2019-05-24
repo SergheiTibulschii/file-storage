@@ -26,8 +26,8 @@ const saveFile = (fileName, dataBuffer) => {
         fileStat.size
       )
 
-      await fileRepository.saveFileMetadata(fileMetadata)
-      resolve()
+      const result = await fileRepository.saveFileMetadata(fileMetadata)
+      resolve(result)
     } catch (err) {
       reject(err)
     }

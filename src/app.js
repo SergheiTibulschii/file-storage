@@ -42,9 +42,13 @@ app.put('/files/:fileName', readBinary, async (req, res) => {
 
   try {
     var fileDataBuffer = Buffer.from(req.body, 'binary')
-    await fileStorage.saveFile(fileName, fileDataBuffer)
-
-    res.end()
+    const result =  await fileStorage.saveFile(fileName, fileDataBuffer)
+    
+    if(result){
+      res.status(201).end() 
+    }else{
+      res.status(204).end() 
+    }
   } catch (err) {
     res.status(500).send(err)
   }

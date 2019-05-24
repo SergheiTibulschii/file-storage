@@ -5,15 +5,17 @@ const tableName = process.env.FILE_METADATA_TABLE
 
 const saveFileMetadata = fileMetadata => {
   return new Promise((resolve, reject) => {
-    try {
-      getDb()
+    getDb()
         .collection(tableName)
-        .replaceOne({ fileName: fileMetadata.fileName }, fileMetadata, { upsert: true })
+        .replaceOne({ fileName: fileMetadata.fileName }, fileMetadata, { upsert: true }, (err, result) => {
+          if(err) reject(err)
 
-      resolve(fileMetadata)
-    } catch (err) {
-      reject(err)
-    }
+          if((result.message.documents[0].nModified)){
+            resolve(null)
+          }else{
+            resolve(result.ops[0])
+          }
+        })
   })
 }
 

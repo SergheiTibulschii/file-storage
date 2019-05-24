@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "npx jest tests/",
     "dev": "npx env-cmd nodemon src/index.js",
     "lint": "npx eslint src/"
   },
